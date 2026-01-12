@@ -1,0 +1,552 @@
+/*
+Theme Name: Hello Elementor Child
+Template: hello-elementor
+Description: Child theme สำหรับ Hello Elementor พร้อมระบบดึงข้อมูลอัตราแลกเปลี่ยนจาก ธปท.
+Author: blogeverydayth.com
+Version: 1.0.0
+Text Domain: hello-elementor-child
+*/
+
+/* ========================================
+   GLOBAL STYLES - ปรับปรุงรูปแบบทั่วไป
+   ======================================== */
+
+:root {
+    --primary-color: #003d7a;
+    --secondary-color: #0056a8;
+    --accent-color: #00a8e8;
+    --text-dark: #1a1a1a;
+    --text-light: #666;
+    --border-color: #e0e0e0;
+    --bg-light: #f8f9fa;
+    --shadow-sm: 0 2px 4px rgba(0,0,0,0.08);
+    --shadow-md: 0 4px 12px rgba(0,0,0,0.12);
+    --shadow-lg: 0 8px 24px rgba(0,0,0,0.15);
+    --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Sarabun', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+    color: var(--text-dark);
+    line-height: 1.7;
+    font-size: 16px;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+/* โหลด Google Fonts */
+@import url('https://fonts.googleapis.com/css2?family=Sarabun:wght@300;400;500;600;700&display=swap');
+
+/* ========================================
+   TYPOGRAPHY - ปรับปรุงตัวอักษร
+   ======================================== */
+
+h1, h2, h3, h4, h5, h6 {
+    font-weight: 600;
+    line-height: 1.3;
+    margin-bottom: 1rem;
+    color: var(--text-dark);
+}
+
+h1 { font-size: clamp(2rem, 5vw, 3rem); }
+h2 { font-size: clamp(1.75rem, 4vw, 2.5rem); }
+h3 { font-size: clamp(1.5rem, 3vw, 2rem); }
+h4 { font-size: clamp(1.25rem, 2.5vw, 1.75rem); }
+
+p {
+    margin-bottom: 1.5rem;
+    color: var(--text-light);
+}
+
+a {
+    color: var(--primary-color);
+    text-decoration: none;
+    transition: var(--transition);
+}
+
+a:hover {
+    color: var(--accent-color);
+}
+
+/* ========================================
+   CONTAINER & LAYOUT
+   ======================================== */
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+.site-content {
+    padding: 60px 0;
+}
+
+/* ========================================
+   BLOG POST STYLES - หน้าโพสต์
+   ======================================== */
+
+.single-post .entry-header {
+    text-align: center;
+    margin-bottom: 3rem;
+    padding: 3rem 0;
+    background: linear-gradient(135deg, var(--bg-light) 0%, #fff 100%);
+    border-radius: 12px;
+}
+
+.single-post .entry-title {
+    font-size: clamp(2rem, 5vw, 3.5rem);
+    font-weight: 700;
+    margin-bottom: 1rem;
+    background: linear-gradient(135deg, var(--primary-color), var(--accent-color));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+.single-post .entry-meta {
+    display: flex;
+    justify-content: center;
+    gap: 2rem;
+    flex-wrap: wrap;
+    font-size: 0.95rem;
+    color: var(--text-light);
+}
+
+.single-post .entry-meta span {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.single-post .entry-meta span::before {
+    content: "•";
+    color: var(--accent-color);
+    font-weight: bold;
+}
+
+.single-post .entry-content {
+    max-width: 800px;
+    margin: 0 auto;
+    font-size: 1.1rem;
+    line-height: 1.8;
+}
+
+.single-post .entry-content img {
+    border-radius: 12px;
+    box-shadow: var(--shadow-md);
+    margin: 2rem 0;
+    transition: var(--transition);
+}
+
+.single-post .entry-content img:hover {
+    transform: translateY(-4px);
+    box-shadow: var(--shadow-lg);
+}
+
+.single-post .entry-content p {
+    margin-bottom: 1.5rem;
+}
+
+.single-post .entry-content h2,
+.single-post .entry-content h3 {
+    margin-top: 2.5rem;
+    margin-bottom: 1rem;
+    position: relative;
+    padding-left: 1rem;
+}
+
+.single-post .entry-content h2::before,
+.single-post .entry-content h3::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 4px;
+    height: 70%;
+    background: linear-gradient(180deg, var(--primary-color), var(--accent-color));
+    border-radius: 2px;
+}
+
+.single-post .entry-content blockquote {
+    border-left: 4px solid var(--accent-color);
+    padding: 1.5rem 2rem;
+    margin: 2rem 0;
+    background: var(--bg-light);
+    border-radius: 0 8px 8px 0;
+    font-style: italic;
+    color: var(--text-light);
+}
+
+.single-post .entry-content ul,
+.single-post .entry-content ol {
+    margin: 1.5rem 0;
+    padding-left: 2rem;
+}
+
+.single-post .entry-content li {
+    margin-bottom: 0.75rem;
+    color: var(--text-light);
+}
+
+/* ========================================
+   BLOG ARCHIVE - หน้ารวมโพสต์
+   ======================================== */
+
+.blog .site-main,
+.archive .site-main {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 40px 20px;
+}
+
+.blog .page-header,
+.archive .page-header {
+    text-align: center;
+    margin-bottom: 3rem;
+    padding: 2rem 0;
+}
+
+.blog .page-title,
+.archive .page-title {
+    font-size: clamp(2rem, 4vw, 3rem);
+    font-weight: 700;
+    background: linear-gradient(135deg, var(--primary-color), var(--accent-color));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+/* Grid Layout สำหรับโพสต์ */
+.blog .site-main > div,
+.archive .site-main > div {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+    gap: 2rem;
+}
+
+article.post {
+    background: white;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: var(--shadow-sm);
+    transition: var(--transition);
+    display: flex;
+    flex-direction: column;
+}
+
+article.post:hover {
+    transform: translateY(-8px);
+    box-shadow: var(--shadow-lg);
+}
+
+article.post .post-thumbnail {
+    position: relative;
+    overflow: hidden;
+    aspect-ratio: 16/9;
+    background: var(--bg-light);
+}
+
+article.post .post-thumbnail img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: var(--transition);
+}
+
+article.post:hover .post-thumbnail img {
+    transform: scale(1.05);
+}
+
+article.post .entry-header {
+    padding: 1.5rem;
+    flex-grow: 1;
+}
+
+article.post .entry-title {
+    font-size: 1.5rem;
+    margin-bottom: 0.75rem;
+    line-height: 1.4;
+}
+
+article.post .entry-title a {
+    color: var(--text-dark);
+    transition: var(--transition);
+}
+
+article.post .entry-title a:hover {
+    color: var(--accent-color);
+}
+
+article.post .entry-meta {
+    font-size: 0.9rem;
+    color: var(--text-light);
+    margin-bottom: 1rem;
+    display: flex;
+    gap: 1rem;
+    flex-wrap: wrap;
+}
+
+article.post .entry-summary {
+    padding: 0 1.5rem 1.5rem;
+    color: var(--text-light);
+    line-height: 1.6;
+}
+
+article.post .read-more {
+    display: inline-block;
+    padding: 0.75rem 1.5rem;
+    margin: 0 1.5rem 1.5rem;
+    background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+    color: white;
+    border-radius: 6px;
+    font-weight: 500;
+    transition: var(--transition);
+}
+
+article.post .read-more:hover {
+    background: linear-gradient(135deg, var(--secondary-color), var(--accent-color));
+    transform: translateX(4px);
+}
+
+/* ========================================
+   PAGINATION
+   ======================================== */
+
+.pagination {
+    display: flex;
+    justify-content: center;
+    gap: 0.5rem;
+    margin: 3rem 0;
+    flex-wrap: wrap;
+}
+
+.pagination a,
+.pagination span {
+    padding: 0.75rem 1.25rem;
+    background: white;
+    border: 2px solid var(--border-color);
+    border-radius: 8px;
+    color: var(--text-dark);
+    font-weight: 500;
+    transition: var(--transition);
+}
+
+.pagination a:hover {
+    background: var(--primary-color);
+    color: white;
+    border-color: var(--primary-color);
+}
+
+.pagination .current {
+    background: var(--primary-color);
+    color: white;
+    border-color: var(--primary-color);
+}
+
+/* ========================================
+   SIDEBAR
+   ======================================== */
+
+.sidebar {
+    padding: 2rem;
+}
+
+.sidebar .widget {
+    background: white;
+    padding: 2rem;
+    border-radius: 12px;
+    box-shadow: var(--shadow-sm);
+    margin-bottom: 2rem;
+}
+
+.sidebar .widget-title {
+    font-size: 1.5rem;
+    margin-bottom: 1.5rem;
+    padding-bottom: 1rem;
+    border-bottom: 3px solid var(--accent-color);
+}
+
+.sidebar .widget ul {
+    list-style: none;
+    padding: 0;
+}
+
+.sidebar .widget li {
+    padding: 0.75rem 0;
+    border-bottom: 1px solid var(--border-color);
+}
+
+.sidebar .widget li:last-child {
+    border-bottom: none;
+}
+
+.sidebar .widget a {
+    color: var(--text-dark);
+    transition: var(--transition);
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.sidebar .widget a:hover {
+    color: var(--accent-color);
+    padding-left: 0.5rem;
+}
+
+/* ========================================
+   BUTTONS & FORMS
+   ======================================== */
+
+button,
+.button,
+input[type="submit"] {
+    padding: 0.875rem 2rem;
+    background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: var(--transition);
+    font-size: 1rem;
+}
+
+button:hover,
+.button:hover,
+input[type="submit"]:hover {
+    background: linear-gradient(135deg, var(--secondary-color), var(--accent-color));
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-md);
+}
+
+input[type="text"],
+input[type="email"],
+input[type="url"],
+input[type="search"],
+textarea {
+    width: 100%;
+    padding: 0.875rem 1.25rem;
+    border: 2px solid var(--border-color);
+    border-radius: 8px;
+    font-size: 1rem;
+    transition: var(--transition);
+    font-family: inherit;
+}
+
+input:focus,
+textarea:focus {
+    outline: none;
+    border-color: var(--accent-color);
+    box-shadow: 0 0 0 3px rgba(0, 168, 232, 0.1);
+}
+
+/* ========================================
+   RESPONSIVE DESIGN
+   ======================================== */
+
+@media (max-width: 1024px) {
+    .blog .site-main > div,
+    .archive .site-main > div {
+        grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+        gap: 1.5rem;
+    }
+}
+
+@media (max-width: 768px) {
+    .site-content {
+        padding: 40px 0;
+    }
+    
+    .single-post .entry-header {
+        padding: 2rem 1rem;
+    }
+    
+    .single-post .entry-content {
+        font-size: 1rem;
+    }
+    
+    .single-post .entry-meta {
+        gap: 1rem;
+    }
+    
+    .blog .site-main > div,
+    .archive .site-main > div {
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
+    }
+    
+    article.post .entry-header {
+        padding: 1.25rem;
+    }
+    
+    article.post .entry-title {
+        font-size: 1.25rem;
+    }
+}
+
+@media (max-width: 480px) {
+    body {
+        font-size: 15px;
+    }
+    
+    .single-post .entry-header {
+        padding: 1.5rem 1rem;
+        margin-bottom: 2rem;
+    }
+    
+    .single-post .entry-content h2::before,
+    .single-post .entry-content h3::before {
+        display: none;
+    }
+    
+    .single-post .entry-content h2,
+    .single-post .entry-content h3 {
+        padding-left: 0;
+    }
+}
+
+/* ========================================
+   ANIMATIONS
+   ======================================== */
+
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+article.post {
+    animation: fadeInUp 0.6s ease-out;
+}
+
+article.post:nth-child(1) { animation-delay: 0.1s; }
+article.post:nth-child(2) { animation-delay: 0.2s; }
+article.post:nth-child(3) { animation-delay: 0.3s; }
+
+/* ========================================
+   UTILITY CLASSES
+   ======================================== */
+
+.text-center { text-align: center; }
+.text-right { text-align: right; }
+.mt-1 { margin-top: 0.5rem; }
+.mt-2 { margin-top: 1rem; }
+.mt-3 { margin-top: 1.5rem; }
+.mb-1 { margin-bottom: 0.5rem; }
+.mb-2 { margin-bottom: 1rem; }
+.mb-3 { margin-bottom: 1.5rem; }
+
+.shadow-sm { box-shadow: var(--shadow-sm); }
+.shadow-md { box-shadow: var(--shadow-md); }
+.shadow-lg { box-shadow: var(--shadow-lg); }

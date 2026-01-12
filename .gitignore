@@ -1,0 +1,31 @@
+# WordPress
+*.log
+.htaccess
+
+# macOS
+.DS_Store
+.AppleDouble
+.LSOverride
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# Temporary files
+*.tmp
+*.bak
+*.cache
+
+# Node modules (if any)
+node_modules/
+package-lock.json
+
+# Composer (if any)
+vendor/
+composer.lock
+
+# ZIP files (keep source only)
+*.zip
