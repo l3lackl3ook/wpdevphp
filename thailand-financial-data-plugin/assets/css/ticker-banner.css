@@ -1,0 +1,294 @@
+/**
+ * Thailand Financial Data - Ticker Banner Styles
+ * สไตล์สำหรับ ticker banner และตารางข้อมูล
+ */
+
+/* ==================== TICKER BANNER ==================== */
+
+.tfd-ticker-banner-wrapper {
+    width: 100%;
+    overflow: hidden;
+    position: relative;
+    display: flex;
+    align-items: center;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.tfd-ticker-banner {
+    display: flex;
+    width: 100%;
+    overflow: hidden;
+}
+
+.tfd-ticker-content {
+    display: flex;
+    align-items: center;
+    white-space: nowrap;
+    animation: ticker-scroll 30s linear infinite;
+    padding: 0 20px;
+}
+
+.tfd-ticker-item {
+    display: inline-flex;
+    align-items: center;
+    margin: 0 30px;
+    font-size: 14px;
+    font-weight: 500;
+    gap: 6px;
+}
+
+.tfd-ticker-flag {
+    font-size: 18px;
+}
+
+.tfd-ticker-label {
+    margin-right: 4px;
+    opacity: 0.9;
+    font-weight: 600;
+}
+
+.tfd-ticker-name {
+    opacity: 0.8;
+    font-size: 13px;
+}
+
+.tfd-ticker-value {
+    font-weight: 700;
+    font-size: 15px;
+}
+
+.tfd-ticker-change {
+    font-size: 12px;
+    padding: 2px 6px;
+    border-radius: 3px;
+}
+
+.tfd-ticker-change.positive {
+    color: #4caf50;
+    background-color: rgba(76, 175, 80, 0.1);
+}
+
+.tfd-ticker-change.negative {
+    color: #f44336;
+    background-color: rgba(244, 67, 54, 0.1);
+}
+
+.tfd-ticker-exchange .tfd-ticker-value {
+    color: #ffd700;
+}
+
+.tfd-ticker-gold .tfd-ticker-value {
+    color: #ffeb3b;
+}
+
+.tfd-ticker-oil .tfd-ticker-value {
+    color: #90caf9;
+}
+
+.tfd-ticker-banner-empty {
+    padding: 12px 20px;
+    text-align: center;
+    background-color: #f5f5f5;
+    color: #666;
+    font-size: 14px;
+}
+
+@keyframes ticker-scroll {
+    0% {
+        transform: translateX(0);
+    }
+    100% {
+        transform: translateX(-50%);
+    }
+}
+
+/* Pause on hover */
+.tfd-ticker-banner-wrapper:hover .tfd-ticker-content {
+    animation-play-state: paused;
+}
+
+/* ==================== EXCHANGE TABLE ==================== */
+
+.tfd-exchange-table-wrapper {
+    margin: 20px 0;
+    background: #fff;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+}
+
+.tfd-table-header {
+    padding: 15px 20px;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: #fff;
+}
+
+.tfd-last-update {
+    margin: 0;
+    font-size: 14px;
+    font-weight: 500;
+}
+
+.tfd-table-responsive {
+    overflow-x: auto;
+}
+
+.tfd-exchange-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 14px;
+}
+
+.tfd-exchange-table thead {
+    background-color: #f8f9fa;
+}
+
+.tfd-exchange-table th {
+    padding: 15px;
+    text-align: left;
+    font-weight: 600;
+    color: #333;
+    border-bottom: 2px solid #dee2e6;
+}
+
+.tfd-exchange-table td {
+    padding: 15px;
+    border-bottom: 1px solid #f0f0f0;
+}
+
+.tfd-currency-row:hover {
+    background-color: #f8f9fa;
+}
+
+.tfd-col-currency {
+    min-width: 250px;
+}
+
+.tfd-flag {
+    font-size: 24px;
+    margin-right: 10px;
+    vertical-align: middle;
+}
+
+.tfd-currency-name {
+    font-weight: 500;
+    color: #333;
+}
+
+.tfd-col-buy,
+.tfd-col-sell {
+    font-weight: 600;
+    color: #1976d2;
+    text-align: right;
+}
+
+.tfd-col-change {
+    text-align: center;
+}
+
+.tfd-change {
+    display: inline-block;
+    padding: 4px 10px;
+    border-radius: 4px;
+    font-weight: 600;
+    font-size: 13px;
+}
+
+.tfd-change.positive {
+    color: #2e7d32;
+    background-color: #e8f5e9;
+}
+
+.tfd-change.negative {
+    color: #c62828;
+    background-color: #ffebee;
+}
+
+.tfd-change.neutral {
+    color: #757575;
+}
+
+.tfd-table-footer {
+    padding: 15px 20px;
+    background-color: #f8f9fa;
+    border-top: 1px solid #dee2e6;
+}
+
+.tfd-disclaimer {
+    margin: 0;
+    color: #666;
+    font-size: 12px;
+    text-align: center;
+}
+
+.tfd-no-data {
+    padding: 40px 20px;
+    text-align: center;
+    color: #999;
+    font-size: 16px;
+}
+
+/* Modern Style */
+.tfd-table-modern .tfd-exchange-table thead {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+}
+
+.tfd-table-modern .tfd-exchange-table th {
+    color: #fff;
+    border-bottom: none;
+}
+
+/* Classic Style */
+.tfd-table-classic .tfd-exchange-table {
+    border: 1px solid #dee2e6;
+}
+
+.tfd-table-classic .tfd-exchange-table th,
+.tfd-table-classic .tfd-exchange-table td {
+    border: 1px solid #dee2e6;
+}
+
+/* Minimal Style */
+.tfd-table-minimal .tfd-exchange-table thead {
+    background: transparent;
+}
+
+.tfd-table-minimal .tfd-exchange-table th {
+    color: #333;
+    border-bottom: 2px solid #333;
+}
+
+.tfd-table-minimal .tfd-exchange-table td {
+    border-bottom: 1px solid #eee;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .tfd-ticker-item {
+        margin: 0 15px;
+        font-size: 12px;
+    }
+    
+    .tfd-ticker-value {
+        font-size: 13px;
+    }
+    
+    .tfd-exchange-table {
+        font-size: 12px;
+    }
+    
+    .tfd-exchange-table th,
+    .tfd-exchange-table td {
+        padding: 10px 8px;
+    }
+    
+    .tfd-col-currency {
+        min-width: 180px;
+    }
+    
+    .tfd-flag {
+        font-size: 18px;
+        margin-right: 6px;
+    }
+}
+

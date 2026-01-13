@@ -1,0 +1,499 @@
+/**
+ * Growfox Shortcodes Styles
+ * สไตล์สำหรับ ticker banner เหมือนลงทุนแมน
+ */
+
+/* ==================== TICKER BANNER ==================== */
+
+.growfox-ticker-wrapper {
+    width: 100vw !important;
+    max-width: none !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    position: relative;
+    left: 50%;
+    right: 50%;
+    margin-left: -50vw !important;
+    margin-right: -50vw !important;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    background: linear-gradient(135deg, #1a5f4a 0%, #2d8b6e 100%) !important;
+    border-radius: 0 !important;
+}
+
+.growfox-ticker {
+    display: flex;
+    width: 100%;
+    overflow: hidden;
+}
+
+.growfox-ticker-content {
+    display: flex;
+    align-items: center;
+    white-space: nowrap;
+    animation: growfox-ticker-scroll 40s linear infinite;
+    padding: 0 30px;
+}
+
+.growfox-ticker-item {
+    display: inline-flex;
+    align-items: center;
+    margin: 0 40px;
+    font-size: 15px;
+    font-weight: 500;
+    gap: 8px;
+    padding: 12px 0;
+}
+
+.growfox-flag {
+    font-size: 24px;
+    filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.2));
+}
+
+.growfox-currency {
+    font-weight: 700;
+    font-size: 16px;
+    color: #ffd700 !important;
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
+    letter-spacing: 0.5px;
+}
+
+.growfox-label {
+    opacity: 0.95;
+    font-size: 14px;
+    color: rgba(255, 255, 255, 0.9) !important;
+}
+
+.growfox-value {
+    font-weight: 700;
+    font-size: 16px;
+    color: #ffffff !important;
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
+    background: rgba(255, 255, 255, 0.1);
+    padding: 4px 10px;
+    border-radius: 4px;
+    backdrop-filter: blur(10px);
+}
+
+.growfox-value.positive {
+    color: #4caf50 !important;
+    background: rgba(76, 175, 80, 0.2);
+}
+
+.growfox-value.negative {
+    color: #f44336 !important;
+    background: rgba(244, 67, 54, 0.2);
+}
+
+.growfox-value.neutral {
+    color: #ffffff !important;
+}
+
+.growfox-change-icon {
+    font-size: 12px;
+    margin-left: 4px;
+}
+
+.growfox-change-icon.positive {
+    color: #4caf50 !important;
+}
+
+.growfox-change-icon.negative {
+    color: #f44336 !important;
+}
+
+.growfox-separator {
+    opacity: 0.6;
+    margin: 0 6px;
+    color: rgba(255, 255, 255, 0.6) !important;
+}
+
+@keyframes growfox-ticker-scroll {
+    0% {
+        transform: translateX(0);
+    }
+    100% {
+        transform: translateX(-50%);
+    }
+}
+
+.growfox-ticker-wrapper:hover .growfox-ticker-content {
+    animation-play-state: paused;
+}
+
+/* ==================== EXCHANGE TABLE ==================== */
+
+.growfox-table-wrapper {
+    margin: 20px 0;
+    background: #fff;
+    border-radius: 12px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+}
+
+.growfox-table-header {
+    padding: 20px 30px;
+    background: linear-gradient(135deg, #1a5f4a 0%, #2d8b6e 100%);
+    color: #fff;
+}
+
+.growfox-period,
+.growfox-last-update {
+    margin: 0;
+    font-size: 14px;
+    font-weight: 500;
+    color: rgba(255, 255, 255, 0.95);
+}
+
+.growfox-period {
+    font-size: 18px;
+    font-weight: 700;
+    margin-bottom: 8px;
+    color: #fff;
+}
+
+.growfox-table-responsive {
+    overflow-x: auto;
+}
+
+.growfox-exchange-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 15px;
+}
+
+.growfox-exchange-table thead {
+    background: linear-gradient(135deg, #1a5f4a 0%, #2d8b6e 100%);
+}
+
+.growfox-exchange-table th {
+    padding: 18px 20px;
+    text-align: left;
+    font-weight: 700;
+    color: #fff;
+    border-bottom: none;
+    text-transform: uppercase;
+    font-size: 13px;
+    letter-spacing: 0.5px;
+}
+
+.growfox-exchange-table td {
+    padding: 18px 20px;
+    border-bottom: 1px solid #f0f0f0;
+}
+
+.growfox-currency-row {
+    transition: all 0.2s ease;
+}
+
+.growfox-currency-row:hover {
+    background-color: #f8faf9;
+    transform: translateX(4px);
+}
+
+.growfox-col-currency {
+    min-width: 280px;
+}
+
+.growfox-flag {
+    font-size: 28px;
+    margin-right: 12px;
+    vertical-align: middle;
+}
+
+.growfox-currency-name {
+    font-weight: 600;
+    color: #2c3e50;
+    font-size: 15px;
+}
+
+.growfox-col-buy,
+.growfox-col-sell,
+.growfox-col-transfer {
+    font-weight: 700;
+    color: #1a5f4a;
+    text-align: right;
+    font-size: 16px;
+}
+
+.growfox-col-buy {
+    color: #27ae60;
+}
+
+.growfox-col-sell {
+    color: #e74c3c;
+}
+
+.growfox-table-footer {
+    padding: 18px 30px;
+    background-color: #f8faf9;
+    border-top: 1px solid #e0e0e0;
+}
+
+.growfox-disclaimer {
+    margin: 0;
+    color: #7f8c8d;
+    font-size: 13px;
+    text-align: center;
+    line-height: 1.6;
+}
+
+.growfox-no-data {
+    padding: 60px 20px;
+    text-align: center;
+    color: #95a5a6;
+    font-size: 18px;
+    background: #f8faf9;
+    border-radius: 12px;
+}
+
+/* Modern Style */
+.growfox-table-modern .growfox-exchange-table thead {
+    background: linear-gradient(135deg, #1a5f4a 0%, #2d8b6e 100%);
+}
+
+.growfox-table-modern .growfox-exchange-table th {
+    color: #fff;
+    border-bottom: none;
+}
+
+/* Classic Style */
+.growfox-table-classic .growfox-exchange-table {
+    border: 2px solid #e0e0e0;
+}
+
+.growfox-table-classic .growfox-exchange-table th,
+.growfox-table-classic .growfox-exchange-table td {
+    border: 1px solid #e0e0e0;
+}
+
+/* Minimal Style */
+.growfox-table-minimal .growfox-exchange-table thead {
+    background: transparent;
+}
+
+.growfox-table-minimal .growfox-exchange-table th {
+    color: #2c3e50;
+    border-bottom: 3px solid #1a5f4a;
+}
+
+.growfox-table-minimal .growfox-exchange-table td {
+    border-bottom: 1px solid #ecf0f1;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .growfox-ticker-item {
+        margin: 0 20px;
+        font-size: 13px;
+        gap: 6px;
+    }
+    
+    .growfox-flag {
+        font-size: 20px;
+    }
+    
+    .growfox-currency {
+        font-size: 14px;
+    }
+    
+    .growfox-value {
+        font-size: 14px;
+        padding: 3px 8px;
+    }
+    
+    .growfox-exchange-table {
+        font-size: 13px;
+    }
+    
+    .growfox-exchange-table th,
+    .growfox-exchange-table td {
+        padding: 12px 10px;
+    }
+    
+    .growfox-col-currency {
+        min-width: 200px;
+    }
+    
+    .growfox-flag {
+        font-size: 22px;
+        margin-right: 8px;
+    }
+}
+
+@media (max-width: 480px) {
+    .growfox-ticker-item {
+        margin: 0 15px;
+        font-size: 12px;
+    }
+    
+    .growfox-value {
+        font-size: 13px;
+    }
+}
+
+
+/* ==================== GOLD PRICE CARD ==================== */
+
+.col-4.the-column.gold {
+    background: #fff;
+    border-radius: 12px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+    padding: 30px;
+    margin: 30px auto;
+    max-width: 600px;
+}
+
+.col-4.the-column.gold .title-wrapper {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 25px;
+    padding-bottom: 20px;
+    border-bottom: 2px solid #f0f0f0;
+}
+
+.col-4.the-column.gold .exc-title {
+    font-size: 24px;
+    font-weight: 700;
+    color: #2c3e50;
+    margin: 0;
+}
+
+.col-4.the-column.gold .gold-img {
+    width: 60px;
+    height: auto;
+}
+
+.col-4.the-column.gold .gold-label {
+    font-size: 18px;
+    font-weight: 600;
+    color: #7f8c8d;
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+.col-4.the-column.gold .gold-row {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+    background: linear-gradient(135deg, #fff9e6 0%, #fff5d6 100%);
+    padding: 25px;
+    border-radius: 12px;
+    margin-bottom: 20px;
+}
+
+.col-4.the-column.gold .price {
+    text-align: center;
+}
+
+.col-4.the-column.gold .tag-title {
+    font-size: 14px;
+    color: #7f8c8d;
+    margin: 0 0 10px 0;
+    font-weight: 500;
+}
+
+.col-4.the-column.gold .g-price {
+    font-size: 36px;
+    font-weight: 700;
+    color: #f39c12;
+    margin: 0;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.col-4.the-column.gold .date,
+.col-4.the-column.gold .time {
+    text-align: center;
+    font-size: 14px;
+    color: #7f8c8d;
+}
+
+.col-4.the-column.gold .date p,
+.col-4.the-column.gold .time p {
+    margin: 0;
+    line-height: 1.6;
+}
+
+.col-4.the-column.gold .diff {
+    text-align: center;
+    padding: 15px;
+    border-radius: 8px;
+    grid-column: span 2;
+}
+
+.col-4.the-column.gold .diff.plus {
+    background: linear-gradient(135deg, #d4edda 0%, #c3e6cb 100%);
+}
+
+.col-4.the-column.gold .diff.minus {
+    background: linear-gradient(135deg, #f8d7da 0%, #f5c6cb 100%);
+}
+
+.col-4.the-column.gold .diff.neutral {
+    background: linear-gradient(135deg, #e2e3e5 0%, #d6d8db 100%);
+}
+
+.col-4.the-column.gold .diff .txt {
+    font-size: 14px;
+    color: #7f8c8d;
+    margin: 0 0 5px 0;
+    font-weight: 500;
+}
+
+.col-4.the-column.gold .diff .num {
+    font-size: 28px;
+    font-weight: 700;
+    margin: 0;
+}
+
+.col-4.the-column.gold .diff.plus .num {
+    color: #27ae60;
+}
+
+.col-4.the-column.gold .diff.minus .num {
+    color: #e74c3c;
+}
+
+.col-4.the-column.gold .diff.neutral .num {
+    color: #7f8c8d;
+}
+
+.col-4.the-column.gold .ref-wrapper {
+    text-align: center;
+    font-size: 13px;
+    color: #95a5a6;
+    margin-top: 15px;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .col-4.the-column.gold {
+        padding: 20px;
+        margin: 20px 10px;
+    }
+    
+    .col-4.the-column.gold .exc-title {
+        font-size: 20px;
+    }
+    
+    .col-4.the-column.gold .gold-img {
+        width: 50px;
+    }
+    
+    .col-4.the-column.gold .g-price {
+        font-size: 28px;
+    }
+    
+    .col-4.the-column.gold .gold-row {
+        grid-template-columns: 1fr;
+        gap: 15px;
+        padding: 20px;
+    }
+    
+    .col-4.the-column.gold .diff {
+        grid-column: span 1;
+    }
+}

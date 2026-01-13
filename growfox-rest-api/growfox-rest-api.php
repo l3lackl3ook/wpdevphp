@@ -24,6 +24,9 @@ class Growfox_Rest_API {
     public function __construct() {
         add_action('rest_api_init', [$this, 'register_routes']);
         
+        // โหลด Shortcodes (สำหรับเว็บที่ไม่มี Elementor)
+        require_once GROWFOX_PATH . 'includes/shortcodes.php';
+        
         if (class_exists('ACF')) {
             require_once GROWFOX_PATH . 'includes/acf-fields.php';
             require_once GROWFOX_PATH . 'includes/hide-acf-tags.php';
@@ -57,6 +60,34 @@ class Growfox_Rest_API {
             'methods' => 'POST',
             'callback' => [$this, 'update_single_rate'],
             'permission_callback' => '__return_true'
+        ]);
+        
+        // Endpoint: รับข้อมูลราคาทอง
+        register_rest_route('growfox/v1', '/gold-prices', [
+            [
+                'methods' => 'POST',
+                'callback' => [$this, 'update_gold_prices'],
+                'permission_callback' => '__return_true'
+            ],
+            [
+                'methods' => 'GET',
+                'callback' => [$this, 'get_gold_prices'],
+                'permission_callback' => '__return_true'
+            ]
+        ]);
+        
+        // Endpoint: รับข้อมูลราคาน้ำมัน
+        register_rest_route('growfox/v1', '/oil-prices', [
+            [
+                'methods' => 'POST',
+                'callback' => [$this, 'update_oil_prices'],
+                'permission_callback' => '__return_true'
+            ],
+            [
+                'methods' => 'GET',
+                'callback' => [$this, 'get_oil_prices'],
+                'permission_callback' => '__return_true'
+            ]
         ]);
     }
     
@@ -225,6 +256,90 @@ class Growfox_Rest_API {
     // ลงทะเบียน Elementor Widgets
     public function register_widgets($widgets_manager) {
         $widgets_manager->register(new \Growfox_Exchange_Table_Widget());
+    }
+    
+    // รับข้อมูลราคาทอง (GET)
+    public function get_gold_prices($request) {
+        $data = get_option('options_gold_data');
+        $last_update = get_option('options_gold_last_update');
+        
+        if (!$data) {
+            return new WP_REST_Response([
+                'success' => false,
+                'message' => 'No gold data available'
+            ], 200);
+        }
+        
+        return new WP_REST_Response([
+            'success' => true,
+            'last_update' => $last_update,
+            'data' => json_decode($data, true)
+        ], 200);
+    }
+    
+    // อัพเดทราคาทอง (POST)
+    public function update_gold_prices($request) {
+        $raw_body = $request->get_body();
+        $data = json_decode($raw_body, true);
+        
+        if (empty($data)) {
+            return new WP_Error('invalid_data', 'Invalid gold data', ['status' => 400]);
+        }
+        
+        // บันทึกข้อมูล
+        $json_data = json_encode($data, JSON_UNESCAPED_UNICODE);
+        update_option('options_gold_data', $json_data);
+        update_option('options_gold_last_update', current_time('mysql'));
+        
+        error_log('Growfox API - Gold prices updated');
+        
+        return new WP_REST_Response([
+            'success' => true,
+            'message' => 'Gold prices updated',
+            'timestamp' => current_time('mysql')
+        ], 200);
+    }
+    
+    // รับข้อมูลราคาน้ำมัน (GET)
+    public function get_oil_prices($request) {
+        $data = get_option('options_oil_data');
+        $last_update = get_option('options_oil_last_update');
+        
+        if (!$data) {
+            return new WP_REST_Response([
+                'success' => false,
+                'message' => 'No oil data available'
+            ], 200);
+        }
+        
+        return new WP_REST_Response([
+            'success' => true,
+            'last_update' => $last_update,
+            'data' => json_decode($data, true)
+        ], 200);
+    }
+    
+    // อัพเดทราคาน้ำมัน (POST)
+    public function update_oil_prices($request) {
+        $raw_body = $request->get_body();
+        $data = json_decode($raw_body, true);
+        
+        if (empty($data)) {
+            return new WP_Error('invalid_data', 'Invalid oil data', ['status' => 400]);
+        }
+        
+        // บันทึกข้อมูล
+        $json_data = json_encode($data, JSON_UNESCAPED_UNICODE);
+        update_option('options_oil_data', $json_data);
+        update_option('options_oil_last_update', current_time('mysql'));
+        
+        error_log('Growfox API - Oil prices updated');
+        
+        return new WP_REST_Response([
+            'success' => true,
+            'message' => 'Oil prices updated',
+            'timestamp' => current_time('mysql')
+        ], 200);
     }
 }
 
