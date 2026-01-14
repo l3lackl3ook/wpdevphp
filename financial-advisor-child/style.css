@@ -1,0 +1,358 @@
+/*
+Theme Name: Financial Advisor Child
+Theme URI: https://siamfinancial.com
+Description: Child theme for Financial Advisor with custom blog layouts
+Author: Siam Financial
+Template: financial-advisor
+Version: 1.0.0
+*/
+
+/* Import parent theme styles */
+@import url('../financial-advisor/style.css');
+
+/* ==================== CUSTOM BLOG STYLES ==================== */
+
+/* Column Page (Category Grid) */
+.column-wrapper {
+    padding: 60px 0;
+    background: #f8f9fa;
+}
+
+.column-wrapper .block-title {
+    text-align: center;
+    margin-bottom: 50px;
+}
+
+.column-wrapper .block-title .title {
+    font-size: 42px;
+    font-weight: 700;
+    color: #2c3e50;
+    margin-bottom: 15px;
+}
+
+.column-wrapper .block-title .desc {
+    font-size: 18px;
+    color: #7f8c8d;
+    line-height: 1.6;
+}
+
+.column-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 30px;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.column-list li {
+    background: #fff;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+    transition: all 0.3s ease;
+}
+
+.column-list li:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.15);
+}
+
+.column-list .img-post {
+    width: 100%;
+    height: 200px;
+    overflow: hidden;
+}
+
+.column-list .img-post img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.3s ease;
+}
+
+.column-list li:hover .img-post img {
+    transform: scale(1.1);
+}
+
+.column-list .block-details {
+    padding: 25px;
+}
+
+.column-list .count {
+    font-size: 14px;
+    color: #95a5a6;
+    margin-bottom: 10px;
+}
+
+.column-list .title-post {
+    font-size: 20px;
+    font-weight: 700;
+    color: #2c3e50;
+    margin: 0;
+}
+
+.column-list .title-post a {
+    color: #2c3e50;
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+.column-list .title-post a:hover {
+    color: #1a5f4a;
+}
+
+/* Category Page (Article List) */
+.category-wrapper {
+    padding: 60px 0;
+    background: #fff;
+}
+
+.category-wrapper .block-title {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 40px;
+    padding-bottom: 20px;
+    border-bottom: 3px solid #1a5f4a;
+}
+
+.category-wrapper .block-title .title {
+    font-size: 36px;
+    font-weight: 700;
+    color: #2c3e50;
+    margin: 0;
+}
+
+.tab-button-wrapper {
+    display: flex;
+    gap: 10px;
+}
+
+.tab-button {
+    padding: 12px 30px;
+    background: #f8f9fa;
+    color: #7f8c8d;
+    text-decoration: none;
+    border-radius: 8px;
+    font-weight: 600;
+    transition: all 0.3s ease;
+}
+
+.tab-button:hover {
+    background: #e9ecef;
+    color: #2c3e50;
+}
+
+.tab-button.active {
+    background: #1a5f4a;
+    color: #fff;
+}
+
+.article-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.article-list li {
+    display: flex;
+    gap: 30px;
+    padding: 30px 0;
+    border-bottom: 1px solid #e9ecef;
+    transition: all 0.3s ease;
+}
+
+.article-list li:hover {
+    background: #f8f9fa;
+    padding-left: 20px;
+    padding-right: 20px;
+    margin-left: -20px;
+    margin-right: -20px;
+    border-radius: 12px;
+}
+
+.article-list .img-post {
+    flex-shrink: 0;
+    width: 280px;
+    height: 180px;
+    border-radius: 12px;
+    overflow: hidden;
+}
+
+.article-list .img-post img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.3s ease;
+}
+
+.article-list li:hover .img-post img {
+    transform: scale(1.05);
+}
+
+.article-list .block-details {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.author-date-wrapper {
+    display: flex;
+    gap: 15px;
+    align-items: center;
+    margin-bottom: 12px;
+}
+
+.author-date-wrapper .author {
+    color: #1a5f4a;
+    font-weight: 600;
+    text-decoration: none;
+    font-size: 14px;
+}
+
+.author-date-wrapper .date {
+    color: #95a5a6;
+    font-size: 14px;
+    margin: 0;
+}
+
+.article-list .title-post {
+    font-size: 22px;
+    font-weight: 700;
+    margin-bottom: 12px;
+}
+
+.article-list .title-post a {
+    color: #2c3e50;
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+.article-list .title-post a:hover {
+    color: #1a5f4a;
+}
+
+.article-list .excerpt {
+    color: #7f8c8d;
+    font-size: 15px;
+    line-height: 1.6;
+    margin-bottom: 15px;
+}
+
+.cate-wrapper {
+    display: flex;
+    gap: 10px;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.cate-wrapper li a {
+    display: inline-block;
+    padding: 6px 15px;
+    border-radius: 20px;
+    font-size: 13px;
+    font-weight: 600;
+    text-decoration: none;
+    transition: all 0.3s ease;
+}
+
+.cate-wrapper li a:hover {
+    background-color: var(--hover-cate-background-color) !important;
+    color: #fff !important;
+}
+
+/* Pagination */
+.pagination-wrapper {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 50px;
+    padding-top: 30px;
+    border-top: 1px solid #e9ecef;
+}
+
+.pagination {
+    display: flex;
+    gap: 8px;
+}
+
+.page-numbers {
+    padding: 10px 16px;
+    background: #f8f9fa;
+    color: #7f8c8d;
+    text-decoration: none;
+    border-radius: 8px;
+    font-weight: 600;
+    transition: all 0.3s ease;
+}
+
+.page-numbers:hover {
+    background: #1a5f4a;
+    color: #fff;
+}
+
+.page-numbers.current {
+    background: #1a5f4a;
+    color: #fff;
+}
+
+.page-numbers.dots {
+    background: transparent;
+    pointer-events: none;
+}
+
+.pagination-wrapper .showing {
+    color: #7f8c8d;
+    font-size: 14px;
+    margin: 0;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .column-list {
+        grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+        gap: 20px;
+    }
+    
+    .category-wrapper .block-title {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 20px;
+    }
+    
+    .article-list li {
+        flex-direction: column;
+        gap: 20px;
+    }
+    
+    .article-list .img-post {
+        width: 100%;
+        height: 200px;
+    }
+    
+    .pagination-wrapper {
+        flex-direction: column;
+        gap: 20px;
+    }
+}
+
+@media (max-width: 480px) {
+    .column-list {
+        grid-template-columns: 1fr;
+    }
+    
+    .column-wrapper .block-title .title {
+        font-size: 32px;
+    }
+    
+    .category-wrapper .block-title .title {
+        font-size: 28px;
+    }
+    
+    .article-list .title-post {
+        font-size: 18px;
+    }
+}

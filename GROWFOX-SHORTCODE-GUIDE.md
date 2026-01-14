@@ -1,18 +1,19 @@
 # 🚀 คู่มือใช้งาน Growfox REST API + Shortcodes
 
-## สำหรับ siamfinancial.com (ไม่มี Elementor)
+## สำหรับ siamfinancial.com และ synergycrafted.com
 
 ---
 
 ## ✅ สรุปสั้นๆ
 
-**Plugin ที่ใช้:** `growfox-rest-api` (เหมือน blogeverydayth)
+**Plugin ที่ใช้:** `growfox-rest-api` v3.0
 
-**ความแตกต่าง:**
-- **blogeverydayth** → ใช้ Elementor → Dynamic Tags
-- **siamfinancial** → ไม่ใช้ Elementor → Shortcodes
+**ฟีเจอร์:**
+- ✅ อัตราแลกเปลี่ยน (Exchange Rates)
+- ✅ ราคาทองคำ (Gold Prices)
+- ✅ ราคาน้ำมัน (Oil Prices)
 
-**ข้อมูลมาจาก:** Make.com (เหมือนกัน)
+**ข้อมูลมาจาก:** Make.com
 
 ---
 
@@ -21,38 +22,16 @@
 ### ขั้นตอนที่ 1: ติดตั้ง Plugin
 
 1. ไปที่ **WordPress Admin → Plugins → Add New → Upload**
-2. เลือก `growfox-rest-api-with-shortcodes.zip` จาก Desktop
+2. เลือก `growfox-rest-api-v3.zip`
 3. คลิก **Install Now**
 4. คลิก **Activate**
 
 ### ขั้นตอนที่ 2: ตั้งค่า Make.com
 
-ใช้ Make.com scenario เดียวกับ blogeverydayth:
-
-**Webhook URL:**
-```
-POST https://siamfinancial.com/wp-json/growfox/v1/exchange-rates
-```
-
-**ตัวอย่าง JSON:**
-```json
-[
-  {
-    "currency_id": "USD",
-    "period": "30/12/2568",
-    "buying": "31.3489",
-    "selling": "31.4215",
-    "transfer": "31.7436"
-  },
-  {
-    "currency_id": "EUR",
-    "period": "30/12/2568",
-    "buying": "36.7555",
-    "selling": "36.8414",
-    "transfer": "37.5016"
-  }
-]
-```
+ดูคู่มือแยกตามประเภท:
+- **อัตราแลกเปลี่ยน**: ดูไฟล์ `MAKE-SETUP-GUIDE.md`
+- **ราคาทองคำ**: ดูไฟล์ `GOLD-PRICE-SETUP.md`
+- **ราคาน้ำมัน**: ดูไฟล์ `GROWFOX-OIL-SETUP-MAKE.md`
 
 ---
 
@@ -115,9 +94,37 @@ POST https://siamfinancial.com/wp-json/growfox/v1/exchange-rates
 
 ---
 
+### 4. ราคาทองคำ (Card)
+
+```
+[growfox_gold]
+```
+
+**แสดง:**
+- ราคาทองคำแท่ง (รับซื้อ/ขายออก)
+- วันที่และเวลา
+- การเปลี่ยนแปลง (+/-)
+- รูปแบบสวยงามตาม aommoney.com
+
+---
+
+### 5. ราคาน้ำมัน (Table)
+
+```
+[growfox_oil]
+```
+
+**แสดง:**
+- ตารางราคาน้ำมันทุกชนิด
+- ราคาวันนี้และพรุ่งนี้
+- รูปภาพแต่ละชนิดน้ำมัน
+- ธีมสีเขียวตาม Bangchak
+
+---
+
 ## 📝 วิธีใช้งานในหน้า WordPress
 
-### ตัวอย่างที่ 1: หน้าอัตราแลกเปลี่ยน (เหมือน blogeverydayth)
+### ตัวอย่างที่ 1: หน้าอัตราแลกเปลี่ยน (siamfinancial.com)
 
 1. สร้างหน้าใหม่: **Pages → Add New**
 2. ตั้งชื่อ: "อัตราแลกเปลี่ยนวันนี้"
@@ -134,7 +141,31 @@ POST https://siamfinancial.com/wp-json/growfox/v1/exchange-rates
 
 ---
 
-### ตัวอย่างที่ 2: Ticker ใน Header (แสดงทุกหน้า)
+### ตัวอย่างที่ 2: หน้าราคาทองคำ (siamfinancial.com)
+
+1. สร้างหน้าใหม่
+2. เพิ่ม **Shortcode Block**
+3. วางโค้ด:
+
+```
+[growfox_gold]
+```
+
+---
+
+### ตัวอย่างที่ 3: หน้าราคาน้ำมัน (synergycrafted.com)
+
+1. สร้างหน้าใหม่
+2. เพิ่ม **Shortcode Block** (Kubio Theme)
+3. วางโค้ด:
+
+```
+[growfox_oil]
+```
+
+---
+
+### ตัวอย่างที่ 4: Ticker ใน Header (แสดงทุกหน้า)
 
 ใช้ plugin **Insert Headers and Footers** หรือ **WPCode**:
 
@@ -144,34 +175,24 @@ POST https://siamfinancial.com/wp-json/growfox/v1/exchange-rates
 
 ---
 
-### ตัวอย่างที่ 3: แสดงอัตราในเนื้อหา
-
-```
-วันนี้อัตราแลกเปลี่ยน USD ขายที่ [growfox_rate currency="USD" type="selling"] บาท
-```
-
----
-
 ## 🔄 การทดสอบว่ามีข้อมูลหรือยัง
 
-### วิธีที่ 1: เปิด URL นี้
+### อัตราแลกเปลี่ยน
 
 ```
-https://siamfinancial.com/wp-json/growfox/v1/exchange-rates
+GET https://siamfinancial.com/wp-json/growfox/v1/exchange-rates
 ```
 
-จะเห็น JSON ข้อมูลทั้งหมด
+### ราคาทองคำ
 
-### วิธีที่ 2: ใช้ Browser Console
+```
+GET https://siamfinancial.com/wp-json/growfox/v1/gold-prices
+```
 
-1. เปิด WordPress Admin
-2. กด **F12** → แท็บ **Console**
-3. วางโค้ด:
+### ราคาน้ำมัน
 
-```javascript
-fetch('/wp-json/growfox/v1/exchange-rates')
-  .then(r => r.json())
-  .then(data => console.log(data));
+```
+GET https://synergycrafted.com/wp-json/growfox/v1/oil-prices
 ```
 
 ---
@@ -197,6 +218,7 @@ fetch('/wp-json/growfox/v1/exchange-rates')
 2. **Webhook URL เดียวกัน** - แค่เปลี่ยน domain
 3. **ข้อมูลอัพเดทอัตโนมัติ** - เหมือน blogeverydayth
 4. **ไม่ต้องใช้ Elementor** - ใช้ shortcode แทน
+5. **รองรับ Kubio Theme** - ใช้ Shortcode Block
 
 ---
 
@@ -204,14 +226,10 @@ fetch('/wp-json/growfox/v1/exchange-rates')
 
 ### ไม่แสดงข้อมูล?
 
-1. ตรวจสอบว่า Make.com ส่งข้อมูลมาหรือยัง:
-   ```
-   https://siamfinancial.com/wp-json/growfox/v1/exchange-rates
-   ```
-
+1. ตรวจสอบว่า Make.com ส่งข้อมูลมาหรือยัง (ใช้ GET endpoint)
 2. ตรวจสอบ Make.com webhook URL ถูกต้องหรือไม่
-
 3. ลอง trigger Make.com scenario ใหม่
+4. ตรวจสอบ WordPress Error Log
 
 ### Ticker ไม่เลื่อน?
 
@@ -219,22 +237,29 @@ fetch('/wp-json/growfox/v1/exchange-rates')
 2. ดู Console (F12) มี error หรือไม่
 3. ลอง refresh หน้าเว็บ (Ctrl+F5)
 
+### Plugin ไม่ activate ได้?
+
+1. ตรวจสอบ PHP version (ต้อง 7.4+)
+2. ดู error log ใน wp-content/debug.log
+3. ลองปิด plugin อื่นๆ ก่อน
+
 ---
 
 ## 📞 สรุป
 
-**ไฟล์บน Desktop:**
-- `growfox-rest-api-with-shortcodes.zip` - Plugin พร้อม shortcodes
+**ไฟล์:**
+- `growfox-rest-api-v3.zip` - Plugin พร้อม shortcodes
 
-**ขั้นตอน:**
-1. ติดตั้ง plugin
-2. ตั้งค่า Make.com (ใช้ scenario เดิม แค่เปลี่ยน URL)
-3. ใส่ shortcode ในหน้า WordPress
-4. เสร็จ! ข้อมูลจะอัพเดทอัตโนมัติจาก Make.com
-
-**Shortcode หลัก:**
-- `[growfox_ticker]` - Ticker banner
-- `[growfox_table]` - ตารางเต็ม
+**Shortcode ทั้งหมด:**
+- `[growfox_ticker]` - Ticker banner อัตราแลกเปลี่ยน
+- `[growfox_table]` - ตารางอัตราแลกเปลี่ยนเต็ม
 - `[growfox_rate currency="USD" type="selling"]` - อัตราเดี่ยว
+- `[growfox_gold]` - Card ราคาทองคำ
+- `[growfox_oil]` - ตารางราคาน้ำมัน
 
-🎉 **ใช้งานได้เหมือน blogeverydayth แต่ไม่ต้องใช้ Elementor!**
+**REST API Endpoints:**
+- `/wp-json/growfox/v1/exchange-rates` (GET/POST)
+- `/wp-json/growfox/v1/gold-prices` (GET/POST)
+- `/wp-json/growfox/v1/oil-prices` (GET/POST)
+
+🎉 **ใช้งานได้ทั้ง 3 ประเภทข้อมูลในปลักอินเดียว!**

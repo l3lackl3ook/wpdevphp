@@ -497,3 +497,156 @@
         grid-column: span 1;
     }
 }
+
+
+/* ==================== OIL PRICE TABLE ==================== */
+
+.col-4.the-column.oil-price {
+    background: #fff;
+    border-radius: 12px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+    padding: 30px;
+    margin: 30px auto;
+    max-width: 600px;
+}
+
+.col-4.the-column.oil-price .title-wrapper {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 25px;
+    padding-bottom: 20px;
+    border-bottom: 2px solid #f0f0f0;
+}
+
+.col-4.the-column.oil-price .exc-title {
+    font-size: 24px;
+    font-weight: 700;
+    color: #2c3e50;
+    margin: 0;
+}
+
+.col-4.the-column.oil-price .oil-logo {
+    height: 40px;
+    width: auto;
+}
+
+#home-oil-price ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+#home-oil-price li.title {
+    display: grid;
+    grid-template-columns: 2fr 1fr 1fr;
+    gap: 15px;
+    padding: 15px;
+    background: #f8f9fa;
+    border-radius: 8px;
+    margin-bottom: 10px;
+    font-weight: 700;
+    color: #2c3e50;
+    font-size: 14px;
+}
+
+#home-oil-price li.listing {
+    display: grid;
+    grid-template-columns: 2fr 1fr 1fr;
+    gap: 15px;
+    padding: 15px;
+    background: #f8fff8;
+    border-radius: 8px;
+    margin-bottom: 8px;
+    align-items: center;
+    transition: all 0.3s ease;
+}
+
+#home-oil-price li.listing:hover {
+    background: #e8f5e9;
+    transform: translateX(5px);
+}
+
+#home-oil-price .cl-1 {
+    display: flex;
+    align-items: center;
+}
+
+#home-oil-price .cl-1 img {
+    width: 100%;
+    max-width: 180px;
+    height: auto;
+}
+
+#home-oil-price .cl-2,
+#home-oil-price .cl-3 {
+    font-size: 20px;
+    font-weight: 700;
+    color: #2c3e50;
+    text-align: center;
+}
+
+#home-oil-price .cl-3 {
+    color: #00bcd4;
+}
+
+#home-oil-price .ref-wrapper {
+    margin-top: 20px;
+    padding-top: 15px;
+    border-top: 1px solid #e0e0e0;
+    text-align: center;
+    font-size: 13px;
+    color: #95a5a6;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .col-4.the-column.oil-price {
+        padding: 20px;
+        margin: 20px 10px;
+    }
+    
+    .col-4.the-column.oil-price .exc-title {
+        font-size: 20px;
+    }
+    
+    .col-4.the-column.oil-price .oil-logo {
+        height: 30px;
+    }
+    
+    #home-oil-price li.title,
+    #home-oil-price li.listing {
+        grid-template-columns: 1.5fr 1fr 1fr;
+        gap: 10px;
+        padding: 12px;
+        font-size: 13px;
+    }
+    
+    #home-oil-price .cl-1 img {
+        max-width: 120px;
+    }
+    
+    #home-oil-price .cl-2,
+    #home-oil-price .cl-3 {
+        font-size: 16px;
+    }
+}
+
+@media (max-width: 480px) {
+    #home-oil-price li.title,
+    #home-oil-price li.listing {
+        grid-template-columns: 1fr 0.8fr 0.8fr;
+        gap: 8px;
+        padding: 10px;
+        font-size: 12px;
+    }
+    
+    #home-oil-price .cl-1 img {
+        max-width: 100px;
+    }
+    
+    #home-oil-price .cl-2,
+    #home-oil-price .cl-3 {
+        font-size: 14px;
+    }
+}

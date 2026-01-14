@@ -1,14 +1,14 @@
 <?php
 /**
  * Plugin Name: Growfox Rest API
- * Description: รับข้อมูลอัตราแลกเปลี่ยนจาก Make.com (รองรับ 48 สกุลเงิน)
- * Version: 2.7.0
+ * Description: รับข้อมูลอัตราแลกเปลี่ยน ราคาทอง และราคาน้ำมัน จาก Make.com
+ * Version: 3.0.0
  * Author: Growfox
  */
 
 if (!defined('ABSPATH')) exit;
 
-define('GROWFOX_VERSION', '2.7.0');
+define('GROWFOX_VERSION', '3.0.0');
 define('GROWFOX_PATH', plugin_dir_path(__FILE__));
 
 class Growfox_Rest_API {
@@ -322,23 +322,48 @@ class Growfox_Rest_API {
     // อัพเดทราคาน้ำมัน (POST)
     public function update_oil_prices($request) {
         $raw_body = $request->get_body();
+        error_log('Growfox Oil API - Raw body: ' . $raw_body);
+        
         $data = json_decode($raw_body, true);
         
         if (empty($data)) {
+            error_log('Growfox Oil API - Empty data');
             return new WP_Error('invalid_data', 'Invalid oil data', ['status' => 400]);
         }
         
+        // แปลงข้อมูลจาก Make.com format เป็น format ที่ใช้งาน
+        $products = [];
+        foreach ($data as $item) {
+            $image_url = $item['ImageUrl'] ?? '';
+            error_log('Growfox Oil API - Product: ' . ($item['OilName'] ?? 'unknown') . ', ImageUrl: ' . $image_url);
+            
+            $products[] = [
+                'name' => $item['OilName'] ?? '',
+                'price_today' => $item['PriceToday'] ?? '0.00',
+                'price_tomorrow' => $item['PriceTomorrow'] ?? '0.00',
+                'image' => $image_url
+            ];
+        }
+        
+        $oil_data = [
+            'products' => $products,
+            'date' => date('d/m/Y')
+        ];
+        
         // บันทึกข้อมูล
-        $json_data = json_encode($data, JSON_UNESCAPED_UNICODE);
+        $json_data = json_encode($oil_data, JSON_UNESCAPED_UNICODE);
         update_option('options_oil_data', $json_data);
         update_option('options_oil_last_update', current_time('mysql'));
         
-        error_log('Growfox API - Oil prices updated');
+        error_log('Growfox Oil API - Updated ' . count($products) . ' products');
+        error_log('Growfox Oil API - Saved data: ' . $json_data);
         
         return new WP_REST_Response([
             'success' => true,
             'message' => 'Oil prices updated',
-            'timestamp' => current_time('mysql')
+            'count' => count($products),
+            'timestamp' => current_time('mysql'),
+            'debug' => $oil_data
         ], 200);
     }
 }

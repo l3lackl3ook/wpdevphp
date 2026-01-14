@@ -21,6 +21,7 @@ class Growfox_Shortcodes {
         add_shortcode('growfox_table', [$this, 'exchange_table']);
         add_shortcode('growfox_rate', [$this, 'single_rate']);
         add_shortcode('growfox_gold', [$this, 'gold_price_card']);
+        add_shortcode('growfox_oil', [$this, 'oil_price_table']);
         
         add_action('wp_enqueue_scripts', [$this, 'enqueue_assets']);
     }
@@ -334,10 +335,16 @@ class Growfox_Shortcodes {
             return '<div class="growfox-no-data">ข้อมูลไม่ถูกต้อง</div>';
         }
         
-        // ดึงข้อมูล
+        // ดึงข้อมูล และลบ comma ออกก่อนแปลงเป็นตัวเลข
         $bar_buy = $gold['bar_buy'] ?? $gold['buy'] ?? '68100';
+        $bar_buy = str_replace(',', '', $bar_buy); // ลบ comma
+        
         $bar_sell = $gold['bar_sell'] ?? $gold['sell'] ?? '68200';
+        $bar_sell = str_replace(',', '', $bar_sell); // ลบ comma
+        
         $change = $gold['change'] ?? $gold['diff'] ?? 500;
+        $change = str_replace(',', '', $change); // ลบ comma
+        
         $date = $gold['date'] ?? date('d/m/Y');
         $time = $gold['time'] ?? date('H:i');
         
@@ -382,6 +389,66 @@ class Growfox_Shortcodes {
                     </div>
                 </div>
                 <div class="ref-wrapper" style="text-align: center; font-size: 13px; color: #95a5a6; margin-top: 15px;">ข้อมูลจากสมาคมค้าทองคำ</div>
+            </div>
+        </div>
+        <?php
+        return ob_get_clean();
+    }
+    
+    /**
+     * Shortcode: [growfox_oil]
+     * แสดงตารางราคาน้ำมัน
+     */
+    public function oil_price_table($atts) {
+        $atts = shortcode_atts([
+            'style' => 'table',
+        ], $atts);
+        
+        $data = get_option('options_oil_data');
+        $last_update = get_option('options_oil_last_update');
+        
+        if (!$data) {
+            return '<div class="growfox-no-data">ไม่มีข้อมูลราคาน้ำมัน - กรุณาตั้งค่า Make.com webhook</div>';
+        }
+        
+        $oil = json_decode($data, true);
+        if (!$oil || !isset($oil['products'])) {
+            return '<div class="growfox-no-data">ข้อมูลไม่ถูกต้อง</div>';
+        }
+        
+        $products = $oil['products'];
+        $date = $oil['date'] ?? date('d/m/Y');
+        
+        ob_start();
+        ?>
+        <div class="col-4 the-column oil-price">
+            <div class="title-wrapper">
+                <h2 class="exc-title">ราคาน้ำมัน</h2>
+                <img src="https://oil-price.bangchak.co.th/icon/logo_bcp.svg" 
+                     alt="ราคาน้ำมัน" 
+                     class="oil-logo">
+            </div>
+            <div id="home-oil-price">
+                <ul>
+                    <li class="title">
+                        <div class="cl-1">ชนิดน้ำมัน (บาท/ลิตร)</div>
+                        <div class="cl-2">วันนี้</div>
+                        <div class="cl-3">พรุ่งนี้</div>
+                    </li>
+                    <?php foreach ($products as $product): ?>
+                        <li class="listing">
+                            <div class="cl-1">
+                                <img src="<?php echo esc_url($product['image']); ?>" 
+                                     alt="<?php echo esc_attr($product['name']); ?>">
+                            </div>
+                            <div class="cl-2"><?php echo esc_html(number_format((float)$product['price_today'], 2)); ?></div>
+                            <div class="cl-3"><?php echo esc_html(number_format((float)$product['price_tomorrow'], 2)); ?></div>
+                        </li>
+                    <?php endforeach; ?>
+                    <div class="ref-wrapper">
+                        ข้อมูลจากบริษัท บางจาก คอร์ปอเรชั่น จำกัด (มหาชน) วันที่ <?php echo esc_html($date); ?>
+                    </div>
+                </ul>
             </div>
         </div>
         <?php
