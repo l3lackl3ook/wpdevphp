@@ -1,0 +1,388 @@
+/**
+ * Synergy Sidebar Widgets - Minimal & Professional Style
+ * สำหรับเว็บไซต์บทความทางการเงิน
+ */
+
+/* ==================== WIDGET CONTAINER ==================== */
+
+.synergy-widget {
+    background: #ffffff;
+    border-radius: 8px;
+    padding: 20px;
+    margin-bottom: 24px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+    transition: all 0.3s ease;
+}
+
+.synergy-widget:hover {
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.12);
+}
+
+.synergy-widget-title {
+    font-size: 18px;
+    font-weight: 700;
+    color: #1a1a1a;
+    margin: 0 0 16px 0;
+    padding-bottom: 12px;
+    border-bottom: 2px solid #f0f0f0;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.synergy-icon {
+    font-size: 20px;
+}
+
+.synergy-icon-small {
+    font-size: 12px;
+    opacity: 0.7;
+}
+
+/* ==================== POST LIST ==================== */
+
+.synergy-post-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.synergy-post-item {
+    display: flex;
+    gap: 12px;
+    padding: 12px 0;
+    border-bottom: 1px solid #f5f5f5;
+}
+
+.synergy-post-item:last-child {
+    border-bottom: none;
+    padding-bottom: 0;
+}
+
+.synergy-post-item:first-child {
+    padding-top: 0;
+}
+
+.synergy-post-thumb {
+    flex-shrink: 0;
+    width: 70px;
+    height: 70px;
+    border-radius: 6px;
+    overflow: hidden;
+}
+
+.synergy-post-thumb img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.3s ease;
+}
+
+.synergy-post-thumb:hover img {
+    transform: scale(1.1);
+}
+
+.synergy-post-content {
+    flex: 1;
+    min-width: 0;
+}
+
+.synergy-post-title {
+    margin: 0 0 6px 0;
+    font-size: 14px;
+    font-weight: 600;
+    line-height: 1.4;
+}
+
+.synergy-post-title a {
+    color: #2c3e50;
+    text-decoration: none;
+    transition: color 0.2s ease;
+}
+
+.synergy-post-title a:hover {
+    color: #3498db;
+}
+
+.synergy-post-date {
+    font-size: 12px;
+    color: #7f8c8d;
+    display: flex;
+    align-items: center;
+    gap: 4px;
+}
+
+/* ==================== CATEGORIES ==================== */
+
+.synergy-cat-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.synergy-cat-item {
+    margin-bottom: 8px;
+}
+
+.synergy-cat-item:last-child {
+    margin-bottom: 0;
+}
+
+.synergy-cat-item a {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 12px;
+    background: #f8f9fa;
+    border-radius: 6px;
+    text-decoration: none;
+    color: #2c3e50;
+    transition: all 0.2s ease;
+}
+
+.synergy-cat-item a:hover {
+    background: #3498db;
+    color: #ffffff;
+    transform: translateX(4px);
+}
+
+.synergy-cat-name {
+    font-size: 14px;
+    font-weight: 500;
+}
+
+.synergy-cat-count {
+    font-size: 12px;
+    opacity: 0.7;
+}
+
+/* ==================== EXCHANGE RATES MINI ==================== */
+
+.synergy-rates-list {
+    margin-bottom: 12px;
+}
+
+.synergy-rate-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 0;
+    border-bottom: 1px solid #f5f5f5;
+}
+
+.synergy-rate-item:last-child {
+    border-bottom: none;
+}
+
+.synergy-rate-currency {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.synergy-flag {
+    font-size: 18px;
+}
+
+.synergy-currency-code {
+    font-size: 14px;
+    font-weight: 600;
+    color: #2c3e50;
+}
+
+.synergy-rate-value {
+    font-size: 15px;
+    font-weight: 700;
+    color: #27ae60;
+}
+
+.synergy-view-more {
+    display: block;
+    text-align: center;
+    padding: 10px;
+    background: #f8f9fa;
+    border-radius: 6px;
+    color: #3498db;
+    text-decoration: none;
+    font-size: 13px;
+    font-weight: 600;
+    transition: all 0.2s ease;
+}
+
+.synergy-view-more:hover {
+    background: #3498db;
+    color: #ffffff;
+}
+
+/* ==================== GOLD MINI ==================== */
+
+.synergy-gold-prices {
+    background: linear-gradient(135deg, #fff9e6 0%, #fff5d6 100%);
+    padding: 16px;
+    border-radius: 8px;
+}
+
+.synergy-gold-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+.synergy-gold-row:last-of-type {
+    margin-bottom: 12px;
+}
+
+.synergy-gold-label {
+    font-size: 13px;
+    color: #7f8c8d;
+    font-weight: 500;
+}
+
+.synergy-gold-price {
+    font-size: 18px;
+    font-weight: 700;
+    color: #f39c12;
+}
+
+.synergy-gold-change {
+    text-align: center;
+    padding: 8px;
+    border-radius: 6px;
+    font-size: 14px;
+    font-weight: 700;
+}
+
+.synergy-gold-change.up {
+    background: #d4edda;
+    color: #27ae60;
+}
+
+.synergy-gold-change.down {
+    background: #f8d7da;
+    color: #e74c3c;
+}
+
+.synergy-gold-change.neutral {
+    background: #e2e3e5;
+    color: #7f8c8d;
+}
+
+.synergy-change-icon {
+    margin-right: 4px;
+}
+
+/* ==================== NEWSLETTER ==================== */
+
+.synergy-newsletter-desc {
+    font-size: 13px;
+    color: #7f8c8d;
+    margin: 0 0 16px 0;
+    line-height: 1.5;
+}
+
+.synergy-newsletter-form {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.synergy-email-input {
+    width: 100%;
+    padding: 12px;
+    border: 2px solid #e0e0e0;
+    border-radius: 6px;
+    font-size: 14px;
+    transition: all 0.2s ease;
+}
+
+.synergy-email-input:focus {
+    outline: none;
+    border-color: #3498db;
+    box-shadow: 0 0 0 3px rgba(52, 152, 219, 0.1);
+}
+
+.synergy-submit-btn {
+    width: 100%;
+    padding: 12px;
+    background: linear-gradient(135deg, #3498db 0%, #2980b9 100%);
+    color: #ffffff;
+    border: none;
+    border-radius: 6px;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.synergy-submit-btn:hover {
+    background: linear-gradient(135deg, #2980b9 0%, #21618c 100%);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(52, 152, 219, 0.3);
+}
+
+/* ==================== NO DATA ==================== */
+
+.synergy-no-data,
+.synergy-no-posts,
+.synergy-no-cats {
+    text-align: center;
+    padding: 20px;
+    color: #95a5a6;
+    font-size: 14px;
+    background: #f8f9fa;
+    border-radius: 6px;
+}
+
+/* ==================== RESPONSIVE ==================== */
+
+@media (max-width: 768px) {
+    .synergy-widget {
+        padding: 16px;
+        margin-bottom: 16px;
+    }
+    
+    .synergy-widget-title {
+        font-size: 16px;
+    }
+    
+    .synergy-post-thumb {
+        width: 60px;
+        height: 60px;
+    }
+    
+    .synergy-post-title {
+        font-size: 13px;
+    }
+}
+
+/* ==================== DARK MODE SUPPORT ==================== */
+
+@media (prefers-color-scheme: dark) {
+    .synergy-widget {
+        background: #2c3e50;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+    }
+    
+    .synergy-widget-title {
+        color: #ecf0f1;
+        border-bottom-color: #34495e;
+    }
+    
+    .synergy-post-title a {
+        color: #ecf0f1;
+    }
+    
+    .synergy-post-title a:hover {
+        color: #3498db;
+    }
+    
+    .synergy-cat-item a {
+        background: #34495e;
+        color: #ecf0f1;
+    }
+    
+    .synergy-cat-item a:hover {
+        background: #3498db;
+    }
+}
