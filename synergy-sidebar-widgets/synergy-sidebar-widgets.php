@@ -67,10 +67,7 @@ class Synergy_Sidebar_Widgets {
         ob_start();
         ?>
         <div class="synergy-widget synergy-popular-posts">
-            <h3 class="synergy-widget-title">
-                <span class="synergy-icon">🔥</span>
-                บทความยอดนิยม
-            </h3>
+            <h3 class="synergy-widget-title">บทความยอดนิยม</h3>
             <ul class="synergy-post-list">
                 <?php while ($popular->have_posts()): $popular->the_post(); ?>
                     <li class="synergy-post-item">
@@ -86,10 +83,7 @@ class Synergy_Sidebar_Widgets {
                                 <a href="<?php the_permalink(); ?>"><?php the_title(); ?></a>
                             </h4>
                             <?php if ($atts['show_date'] === 'yes'): ?>
-                                <span class="synergy-post-date">
-                                    <span class="synergy-icon-small">📅</span>
-                                    <?php echo get_the_date('d M Y'); ?>
-                                </span>
+                                <span class="synergy-post-date"><?php echo get_the_date('d M Y'); ?></span>
                             <?php endif; ?>
                         </div>
                     </li>
@@ -128,10 +122,7 @@ class Synergy_Sidebar_Widgets {
         ob_start();
         ?>
         <div class="synergy-widget synergy-recent-posts">
-            <h3 class="synergy-widget-title">
-                <span class="synergy-icon">📰</span>
-                บทความล่าสุด
-            </h3>
+            <h3 class="synergy-widget-title">บทความล่าสุด</h3>
             <ul class="synergy-post-list">
                 <?php while ($recent->have_posts()): $recent->the_post(); ?>
                     <li class="synergy-post-item">
@@ -147,10 +138,7 @@ class Synergy_Sidebar_Widgets {
                                 <a href="<?php the_permalink(); ?>"><?php the_title(); ?></a>
                             </h4>
                             <?php if ($atts['show_date'] === 'yes'): ?>
-                                <span class="synergy-post-date">
-                                    <span class="synergy-icon-small">📅</span>
-                                    <?php echo get_the_date('d M Y'); ?>
-                                </span>
+                                <span class="synergy-post-date"><?php echo get_the_date('d M Y'); ?></span>
                             <?php endif; ?>
                         </div>
                     </li>
@@ -187,10 +175,7 @@ class Synergy_Sidebar_Widgets {
         ob_start();
         ?>
         <div class="synergy-widget synergy-categories">
-            <h3 class="synergy-widget-title">
-                <span class="synergy-icon">📂</span>
-                หมวดหมู่
-            </h3>
+            <h3 class="synergy-widget-title">หมวดหมู่</h3>
             <ul class="synergy-cat-list">
                 <?php foreach ($categories as $cat): ?>
                     <li class="synergy-cat-item">
@@ -214,11 +199,13 @@ class Synergy_Sidebar_Widgets {
      */
     public function exchange_mini($atts) {
         $atts = shortcode_atts([
-            'currencies' => 'USD,EUR,GBP,JPY',
+            'currencies' => 'USD,EUR,GBP,JPY,CNY',
             'show_flags' => 'yes'
         ], $atts);
         
         $data = get_option('options_exchange_data');
+        $period = get_option('options_period');
+        
         if (!$data) {
             return '<div class="synergy-no-data">ไม่มีข้อมูลอัตราแลกเปลี่ยน</div>';
         }
@@ -228,16 +215,20 @@ class Synergy_Sidebar_Widgets {
         
         $flags = [
             'USD' => '🇺🇸', 'EUR' => '🇪🇺', 'GBP' => '🇬🇧', 'JPY' => '🇯🇵',
-            'CNY' => '🇨🇳', 'HKD' => '🇭🇰', 'SGD' => '🇸🇬'
+            'CNY' => '🇨🇳', 'HKD' => '🇭🇰', 'SGD' => '🇸🇬', 'AUD' => '🇦🇺',
+            'CHF' => '🇨🇭', 'CAD' => '🇨🇦', 'NZD' => '🇳🇿', 'MYR' => '🇲🇾'
         ];
         
         ob_start();
         ?>
         <div class="synergy-widget synergy-exchange-mini">
-            <h3 class="synergy-widget-title">
-                <span class="synergy-icon">💱</span>
-                อัตราแลกเปลี่ยน
-            </h3>
+            <h3 class="synergy-widget-title">อัตราแลกเปลี่ยน</h3>
+            <?php if ($period): ?>
+                <div class="synergy-widget-meta">
+                    <span class="synergy-meta-date">ประจำวันที่ <?php echo esc_html($period); ?></span>
+                    <span class="synergy-meta-source">ข้อมูลจากธนาคารแห่งประเทศไทย</span>
+                </div>
+            <?php endif; ?>
             <div class="synergy-rates-list">
                 <?php foreach ($rates as $rate): 
                     $currency = strtoupper($rate['currency_id'] ?? '');
@@ -246,8 +237,8 @@ class Synergy_Sidebar_Widgets {
                 ?>
                     <div class="synergy-rate-item">
                         <div class="synergy-rate-currency">
-                            <?php if ($atts['show_flags'] === 'yes'): ?>
-                                <span class="synergy-flag"><?php echo $flags[$currency] ?? ''; ?></span>
+                            <?php if ($atts['show_flags'] === 'yes' && isset($flags[$currency])): ?>
+                                <span class="synergy-flag"><?php echo $flags[$currency]; ?></span>
                             <?php endif; ?>
                             <span class="synergy-currency-code"><?php echo $currency; ?></span>
                         </div>
@@ -257,7 +248,6 @@ class Synergy_Sidebar_Widgets {
                     </div>
                 <?php endforeach; ?>
             </div>
-            <a href="/exchange-rates" class="synergy-view-more">ดูทั้งหมด →</a>
         </div>
         <?php
         return ob_get_clean();
@@ -269,6 +259,8 @@ class Synergy_Sidebar_Widgets {
      */
     public function gold_mini($atts) {
         $data = get_option('options_gold_data');
+        $last_update = get_option('options_gold_last_update');
+        
         if (!$data) {
             return '<div class="synergy-no-data">ไม่มีข้อมูลราคาทอง</div>';
         }
@@ -277,6 +269,8 @@ class Synergy_Sidebar_Widgets {
         $bar_buy = str_replace(',', '', $gold['bar_buy'] ?? '0');
         $bar_sell = str_replace(',', '', $gold['bar_sell'] ?? '0');
         $change = str_replace(',', '', $gold['change'] ?? '0');
+        $date = $gold['date'] ?? '';
+        $time = $gold['time'] ?? '';
         
         $change_class = $change > 0 ? 'up' : ($change < 0 ? 'down' : 'neutral');
         $change_icon = $change > 0 ? '▲' : ($change < 0 ? '▼' : '');
@@ -284,22 +278,30 @@ class Synergy_Sidebar_Widgets {
         ob_start();
         ?>
         <div class="synergy-widget synergy-gold-mini">
-            <h3 class="synergy-widget-title">
-                <span class="synergy-icon">🏆</span>
-                ราคาทองคำ
-            </h3>
+            <h3 class="synergy-widget-title">ราคาทองคำ</h3>
+            <?php if ($date || $time): ?>
+                <div class="synergy-widget-meta">
+                    <?php if ($date): ?>
+                        <span class="synergy-meta-date"><?php echo esc_html($date); ?></span>
+                    <?php endif; ?>
+                    <?php if ($time): ?>
+                        <span class="synergy-meta-time"><?php echo esc_html($time); ?></span>
+                    <?php endif; ?>
+                    <span class="synergy-meta-source">ข้อมูลจากสมาคมค้าทองคำ</span>
+                </div>
+            <?php endif; ?>
             <div class="synergy-gold-prices">
                 <div class="synergy-gold-row">
-                    <span class="synergy-gold-label">ซื้อ</span>
+                    <span class="synergy-gold-label">รับซื้อ</span>
                     <span class="synergy-gold-price"><?php echo number_format((float)$bar_buy, 0); ?></span>
                 </div>
                 <div class="synergy-gold-row">
-                    <span class="synergy-gold-label">ขาย</span>
+                    <span class="synergy-gold-label">ขายออก</span>
                     <span class="synergy-gold-price"><?php echo number_format((float)$bar_sell, 0); ?></span>
                 </div>
                 <div class="synergy-gold-change <?php echo $change_class; ?>">
                     <span class="synergy-change-icon"><?php echo $change_icon; ?></span>
-                    <span class="synergy-change-value"><?php echo number_format(abs((float)$change), 0); ?></span>
+                    <span class="synergy-change-value"><?php echo ($change > 0 ? '+' : '') . number_format((float)$change, 0); ?></span>
                 </div>
             </div>
         </div>
@@ -320,10 +322,7 @@ class Synergy_Sidebar_Widgets {
         ob_start();
         ?>
         <div class="synergy-widget synergy-newsletter">
-            <h3 class="synergy-widget-title">
-                <span class="synergy-icon">📧</span>
-                <?php echo esc_html($atts['title']); ?>
-            </h3>
+            <h3 class="synergy-widget-title"><?php echo esc_html($atts['title']); ?></h3>
             <p class="synergy-newsletter-desc"><?php echo esc_html($atts['description']); ?></p>
             <form class="synergy-newsletter-form" method="post" action="">
                 <input type="email" 
